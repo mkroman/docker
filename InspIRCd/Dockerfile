@@ -2,20 +2,24 @@ FROM debian:wheezy
 
 MAINTAINER Mikkel Kroman <mk@maero.dk>
 
-ADD https://github.com/inspircd/inspircd/archive/v2.0.18.tar.gz /src/
+ENV INSPIRCD_VERSION 2.0.18
 
 # Install InspIRCd.
 RUN apt-get update && \
-  useradd -r inspircd -d /srv/inspircd -s /bin/false && \
-  apt-get install -y build-essential libgnutls-dev pkg-config && \
-  cd /src && \
-  tar xvzf v*.tar.gz && \
+  useradd -r inspircd -d /inspircd -s /bin/false && \
+  apt-get install -y build-essential wget libgnutls-dev pkg-config && \
+  mkdir /src && cd /src && \
+  wget --no-check-certificate https://github.com/inspircd/inspircd/archive/v${INSPIRCD_VERSION}.tar.gz && \
+  tar xvzf v${INSPIRCD_VERSION}.tar.gz && \
   cd inspircd-* && \
-  ./configure --prefix=/srv/inspircd --uid inspircd --enable-gnutls --enable-epoll && \
+  ./configure --prefix=/inspircd --uid inspircd --enable-gnutls --enable-epoll && \
   make && make install && \
   rm -rf /src && \
-  apt-get purge -y build-essential libgnutls-dev pkg-config && apt-get autoremove -y && apt-get clean autoclean
+  apt-get purge -y gcc g++ perl build-essential libgnutls-dev wget pkg-config \
+    binutils cpp patch *-dev libc-bin libc-dev-bin && \
+  apt-get autoremove -y && apt-get clean autoclean
 
+VOLUME ["/inspircd/conf", "/inspircd/data"]
 USER inspircd
 EXPOSE 6667 6697
-ENTRYPOINT ["/srv/inspircd/inspircd", "start"]
+ENTRYPOINT ["/inspircd/inspircd", "start"]
