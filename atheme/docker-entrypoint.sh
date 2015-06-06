@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
 
-chown -R atheme .
 pwd
+chown -R atheme .
 exec gosu atheme /atheme/bin/atheme-services -n
