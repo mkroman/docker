@@ -27,15 +27,7 @@ RUN groupadd -r inspircd && useradd -r -g inspircd inspircd
 # Ensure that our package database is up to date.
 RUN apt-get update \
   && apt-get install -y curl \
-  && rm -rf /var/lib/apt/lists*
-
-# Grab gosu for simple step-down from root.
-RUN gpg --keyserver pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
-RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.2/gosu-$(dpkg --print-architecture)" \
-  && curl -o /usr/local/bin/gosu.asc -SL "https://github.com/tianon/gosu/releases/download/1.2/gosu-$(dpkg --print-architecture).asc" \
-  && gpg --verify /usr/local/bin/gosu.asc \
-  && rm /usr/local/bin/gosu.asc \
-  && chmod +x /usr/local/bin/gosu
+  && rm -rf /var/lib/apt/lists/*
 
 # Environment variables needed for download and verification of the package.
 ENV INSPIRCD_VERSION 2.0.20
@@ -71,6 +63,5 @@ VOLUME /inspircd/conf
 EXPOSE 6667 6697 7777
 
 # Copy the entrypoint script and set it as our entry point.
-COPY docker-entrypoint.sh /docker-entrypoint.sh
 WORKDIR /inspircd
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["bin/inspircd", "--nofork"]
