@@ -63,5 +63,6 @@ VOLUME /inspircd/conf
 EXPOSE 6667 6697 7777
 
 # Copy the entrypoint script and set it as our entry point.
+USER inspircd
 WORKDIR /inspircd
 ENTRYPOINT ["bin/inspircd", "--nofork"]
