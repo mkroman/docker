@@ -44,7 +44,7 @@ RUN set -x \
   && rm factorio.tar.gz && cd /srv/factorio
 
 # Ensure that the /inspircd directory is owned by the inspircd user.
-RUN chown factorio:factorio /srv/factorio
+RUN chown -R factorio:factorio /srv/factorio
 
 # Expose a volume to let the user provide saves.
 VOLUME /srv/factorio/saves
