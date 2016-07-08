@@ -13,7 +13,7 @@ docker run --name factorio-data -v /srv/factorio/saves mkroman/factorio --create
 ### Run the latest version 
 
 ```
-docker run -d --name factorio-server --volumes-from factorio-data -p 34197:31497/udp mkroman/factorio --start-server saves/world.zip --autosave-interval 6
+docker run -d --name factorio-server --volumes-from factorio-data -p 34197:34197/udp mkroman/factorio --start-server saves/world.zip --autosave-interval 6
 ```
 
 ### Handy command for updating to latest image
@@ -21,6 +21,6 @@ docker run -d --name factorio-server --volumes-from factorio-data -p 34197:31497
 docker pull mkroman/factorio && \
   docker stop factorio-server && \
   docker rm factorio-server && \
-  docker run -d --name factorio-server --volumes-from factorio-data -p 34197:31497/udp mkroman/factorio --start-server saves/world.zip --autosave-interval 6
+  docker run -d --name factorio-server --volumes-from factorio-data -p 34197:34197/udp mkroman/factorio --start-server saves/world.zip --autosave-interval 6
  ```
 
