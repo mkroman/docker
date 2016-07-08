@@ -43,14 +43,12 @@ RUN set -x \
   && tar -xzf factorio.tar.gz -C /srv/factorio --strip-components=1 \
   && rm factorio.tar.gz && cd /srv/factorio
 
-# Ensure that the /inspircd directory is owned by the inspircd user.
-RUN chown -R factorio:factorio /srv/factorio
-
-# Expose a volume to let the user provide saves.
-VOLUME /srv/factorio/saves
-
 # Expose the required network ports.
 EXPOSE 34197
+
+# Ensure that the /srv/factorio directory is owned by the factorio user.
+RUN mkdir /srv/factorio/saves
+RUN chown -R factorio:factorio /srv/factorio
 
 # Copy the entrypoint script and set it as our entry point.
 USER factorio
