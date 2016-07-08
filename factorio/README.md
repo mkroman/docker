@@ -2,16 +2,19 @@
 
 Headless factorio server in a docker container.
 
-
 ## Running the server
 
 ### Create a data container
 
-`docker run --name factorio-data -v /srv/factorio/saves mkroman/factorio --create saves/world.zip`
+```
+docker run --name factorio-data -v /srv/factorio/saves mkroman/factorio --create saves/world.zip
+```
 
 ### Run the latest version 
 
-`docker run -d --name factorio-server --volumes-from factorio-data -p 34197:31497/udp mkroman/factorio --start-server saves/world.zip --autosave-interval 6`
+```
+docker run -d --name factorio-server --volumes-from factorio-data -p 34197:31497/udp mkroman/factorio --start-server saves/world.zip --autosave-interval 6
+```
 
 ### Handy command for updating to latest image
 ```
