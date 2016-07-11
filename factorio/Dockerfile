@@ -30,9 +30,9 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 # Environment variables needed for download and verification of the package.
-ENV FACTORIO_VERSION 0.13.7
+ENV FACTORIO_VERSION 0.13.8
 ENV FACTORIO_DOWNLOAD_URL "https://www.factorio.com/get-download/${FACTORIO_VERSION}/headless/linux64"
-ENV FACTORIO_SHA256 "2b8bea08889f5043405a02a8b6679bb07b1caf524e3766f6f6d90ff138a9b2e3"
+ENV FACTORIO_SHA256 "f2ddc173b8d922181cbd1b0a5ca1e6d84b5a936af6155b0c775c598b6ff59136"
 
 # Download factorio.
 RUN set -x \
