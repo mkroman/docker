@@ -44,7 +44,8 @@ RUN build_deps='gcc libc6-dev make libgnutls28-dev pkg-config libfile-copy-link-
   && echo "${INSPIRCD_SHA256} *inspircd.tar.gz" | sha256sum -c - \
   && tar -xzf inspircd.tar.gz -C /usr/src/inspircd --strip-components=1 \
   && rm inspircd.tar.gz && cd /usr/src/inspircd \
-  && ./configure --prefix=/inspircd --enable-gnutls --enable-epoll --uid inspircd \
+  && ./configure --prefix=/inspircd --uid inspircd \
+  && ./configure --enable-extras=m_ssl_gnutls.cpp \
   && make -j$(nproc) && make install \
   && rm -r /usr/src/inspircd \
   && apt-get purge -y --auto-remove ${build_deps}
