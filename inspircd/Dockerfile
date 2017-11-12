@@ -30,9 +30,9 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 # Environment variables needed for download and verification of the package.
-ENV INSPIRCD_VERSION 2.0.24
+ENV INSPIRCD_VERSION 2.0.25
 ENV INSPIRCD_DOWNLOAD_URL "https://github.com/inspircd/inspircd/archive/v${INSPIRCD_VERSION}.tar.gz"
-ENV INSPIRCD_SHA256 "41f702cb84caa2db089a02f511a3da3e7fa3cdce7d2c5040b3c54c5da83c8b40"
+ENV INSPIRCD_SHA256 "c2488fafd04fcabbd8ddc8b9cdc6e0b57e942802b451c9cbccaf5d8483ebd251"
 
 # Build and install InspIRCd.
 RUN build_deps='gcc libc6-dev make libgnutls28-dev pkg-config libfile-copy-link-perl g++' \
